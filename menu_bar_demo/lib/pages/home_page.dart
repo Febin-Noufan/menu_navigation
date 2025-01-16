@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:menu_bar_demo/widget.dart';
-
-import 'account_page.dart';
+import 'package:menu_bar_demo/pages/balace_sheet.dart';
+import 'package:menu_bar_demo/pages/stock_summery.dart';
+import 'package:menu_navigation/menu_navigation.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,105 +11,123 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _currentPage = "Home";
+  String _currentPage = "D Console";
 
-  late List<MenuSection> mainMenuData;
+  List<MenuSection> mainMenuData = [
+    MenuSection(
+      title: "Masters",
+      items: [
+        MenuItem(shortcut: 'A', label: 'Accounts Info', subMenu: [
+          MenuSection(title: "", items: [
+            MenuItem(shortcut: 'G', label: 'Groups', subMenu: [
+              MenuSection(
+                title: "Single group",
+                items: [
+                  MenuItem(
+                    shortcut: 'C',
+                    label: 'Create',
+                  ),
+                  MenuItem(
+                    shortcut: 'D',
+                    label: 'Despaly',
+                  ),
+                  MenuItem(
+                    shortcut: 'A',
+                    label: 'Alter',
+                  ),
+                ],
+              ),
+              MenuSection(
+                title: "Multiple group",
+                items: [
+                  MenuItem(
+                    shortcut: 'R',
+                    label: 'create',
+                  ),
+                  MenuItem(
+                      shortcut: 'E',
+                      label: 'Desplay',
+                      navigateTo: () => StockSummery()),
+                  MenuItem(
+                    shortcut: 'L',
+                    label: 'Alter',
+                  ),
+                ],
+              ),
+              MenuSection(
+                title: "  ",
+                items: [
+                  MenuItem(
+                    shortcut: 'Q',
+                    label: 'Back to Home',
+                  ),
+                ],
+              ),
+            ]),
+            MenuItem(
+              shortcut: 'L',
+              label: 'Ledgers',
+              subMenu: [
+                MenuSection(title: "", items: [
+                  MenuItem(
+                    shortcut: '1',
+                    label: 'Create Ledger',
+                  ),
+                  MenuItem(shortcut: '2', label: 'Modify Ledger'),
+                ])
+              ],
+            ),
+            MenuItem(
+              shortcut: 'V',
+              label: 'Voucher Type',
+              subMenu: [
+                MenuSection(title: "", items: [
+                  MenuItem(shortcut: '1', label: 'Create Voucher'),
+                  MenuItem(shortcut: '2', label: 'Modify Voucher'),
+                ])
+              ],
+            ),
+            MenuItem(
+              shortcut: 'Q',
+              label: 'Back to Home',
+              onTap: null,
+            ),
+          ])
+        ]),
+        MenuItem(
+          shortcut: 'I',
+          label: 'Inventory Info',
+        ),
+      ],
+    ),
+    MenuSection(
+      title: "Reports",
+      items: [
+        MenuItem(
+          shortcut: 'B',
+          label: 'Balance Sheet',
+          navigateTo: () => BalaceSheet(),
+        ),
+        MenuItem(shortcut: 'P', label: 'Profit & Loss A/C', subMenu: [
+          MenuSection(title: "", items: [
+            MenuItem(
+              shortcut: 'X',
+              label: 'X Sheet',
+              // navigateTo: () => BalaceSheet(),
+            ),
+          ])
+        ]),
+        MenuItem(
+          shortcut: 'S',
+          label: 'Stock Summery',
+        ),
+      ],
+    ),
+  ];
 
   @override
   void initState() {
     super.initState();
-    mainMenuData = [
-      MenuSection(
-        title: "Masters",
-        items: [
-          MenuItem(
-            shortcut: 'A',
-            label: 'Accounts Info',
-            onTap: () {
-              navigateToPage(MenuItem(shortcut: 'A', label: 'Accounts Info'));
-            },
-            // subMenu: [
-            //   MenuItem(
-            //     shortcut: '1',
-            //     label: 'Ledger',
-            //     onTap: null, // Add specific functionality
-            //   ),
-            //   MenuItem(
-            //     shortcut: '2',
-            //     label: 'Groups',
-            //     onTap: null, // Add specific functionality
-            //   ),
-            // ],
-          ),
-          MenuItem(
-            shortcut: 'I',
-            label: 'Inventory Info',
-            subMenu: [
-              MenuItem(
-                shortcut: '1',
-                label: 'Stock Items',
-                onTap: null, // Add specific functionality
-              ),
-              MenuItem(
-                shortcut: '2',
-                label: 'Stock Groups',
-                onTap: null, // Add specific functionality
-              ),
-            ],
-          ),
-        ],
-      ),
-      MenuSection(
-        title: "Reports",
-        items: [
-          MenuItem(
-            shortcut: 'B',
-            label: 'Balance Sheet',
-            subMenu: [
-              MenuItem(
-                shortcut: '1',
-                label: 'Assets',
-                onTap: null, // Add specific functionality
-              ),
-              MenuItem(
-                shortcut: '2',
-                label: 'Liabilities',
-                onTap: null, // Add specific functionality
-              ),
-            ],
-          ),
-          MenuItem(
-            shortcut: 'P',
-            label: 'Profit & Loss A/C',
-            subMenu: [
-              MenuItem(
-                shortcut: '1',
-                label: 'Income',
-                onTap: null, // Add specific functionality
-              ),
-              MenuItem(
-                shortcut: '2',
-                label: 'Expenses',
-                onTap: null, // Add specific functionality
-              ),
-            ],
-          ),
-        ],
-      ),
-    ];
-  }
-
-  void navigateToPage(MenuItem menuItem) {
-    if (menuItem.label == 'Accounts Info') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AccountPage()),
-      );
-    } else {
-      setState(() {
-        _currentPage = menuItem.label;
-      });
-    }
   }
 
   @override
@@ -141,7 +159,11 @@ class _HomePageState extends State<HomePage> {
             child: DynamicMenu(
               title: _currentPage,
               menuData: mainMenuData,
-              onMenuItemSelected: navigateToPage,
+              onMenuItemSelected: (menuItem) {
+                setState(() {
+                  _currentPage = menuItem.label;
+                });
+              },
             ),
           ),
         ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'pages/home_page.dart';
+import 'package:menu_bar_demo/pages/home_page.dart';
 
 void main() {
   runApp(const TallyInterfaceApp());
@@ -18,7 +17,7 @@ class TallyInterfaceApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
