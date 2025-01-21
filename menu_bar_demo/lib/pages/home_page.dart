@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:menu_bar_demo/pages/balace_sheet.dart';
 import 'package:menu_bar_demo/pages/stock_summery.dart';
+import 'package:menu_bar_demo/test/templ.dart';
 import 'package:menu_navigation/menu_navigation.dart';
 
 class HomePage extends StatefulWidget {
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
                   MenuItem(
                     shortcut: 'R',
                     label: 'create',
+                    navigateTo: () => StockSummery(),
                   ),
                   MenuItem(
                       shortcut: 'E',
@@ -123,6 +125,30 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     ),
+    MenuSection(
+      title: "Test",
+      items: [
+        MenuItem(
+          shortcut: 'T',
+          label: 'Test Packages',
+          navigateTo: () => SlideFormApp(),
+        ),
+        MenuItem(shortcut: 'P', label: 'Profit & Loss A/C', subMenu: [
+          MenuSection(title: "", items: [
+            MenuItem(
+              shortcut: 'X',
+              label: 'X Sheet',
+
+              // navigateTo: () => BalaceSheet(),
+            ),
+          ])
+        ]),
+        MenuItem(
+          shortcut: 'S',
+          label: 'Stock Summery',
+        ),
+      ],
+    ),
   ];
 
   @override
@@ -134,7 +160,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_currentPage),
+        title: Text("D Console"),
       ),
       body: Row(
         children: [
@@ -144,7 +170,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
               child: Center(
                 child: Text(
-                  _currentPage,
+                  "D Console",
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -157,7 +183,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             flex: 2,
             child: DynamicMenu(
-              title: _currentPage,
+              title: "D Console",
               menuData: mainMenuData,
               onMenuItemSelected: (menuItem) {
                 setState(() {

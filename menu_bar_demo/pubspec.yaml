@@ -36,6 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   menu_navigation:
     path: C:\Users\febin\Desktop\Datamate\packages\menu_navigat\menu_navigation
+  split_screen_wrapper:
+    path: C:\Users\febin\Desktop\Datamate\packages\split screen\split_screen_wrapper
+  slide_pages_package:
+    path: C:\Users\febin\Desktop\Datamate\packages\slide_pages_package\slide_pages_package
+  template_package:
+    path: C:\Users\febin\Desktop\Datamate\packages\template package\template_package
 
 dev_dependencies:
   flutter_test:

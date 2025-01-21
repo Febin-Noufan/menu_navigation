@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class BalaceSheet extends StatefulWidget {
   const BalaceSheet({super.key});
 
@@ -23,7 +22,7 @@ class _AccountPageState extends State<BalaceSheet> {
               color: Colors.white,
               child: const Center(
                 child: Text(
-                  'alace sheet',
+                  'Balace sheet',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
